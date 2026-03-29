@@ -8,7 +8,7 @@ A responsive single-page portfolio hosted on AWS S3 and served via CloudFront wi
 
 ## Live URL
 
-> Replace with your CloudFront URL after deployment  
+> Replace with your CloudFront URL after deployment
 > `https://xxxxxxxx.cloudfront.net`
 
 ---
@@ -33,15 +33,14 @@ A responsive single-page portfolio hosted on AWS S3 and served via CloudFront wi
 
 ### 2. Create S3 Bucket
 ```bash
-# Via AWS Console or CLI
 aws s3 mb s3://rushikesh-portfolio --region us-east-1
 ```
 - Bucket name: `rushikesh-portfolio`
 - Region: `us-east-1`
-- Enabled **Static website hosting** → Index document: `index.html`
+- Enabled Static website hosting → Index document: `index.html`
 
 ### 3. Disable Block Public Access
-- In S3 bucket settings → Permissions → Block Public Access → **Uncheck all** → Save
+- S3 bucket → Permissions → Block Public Access → Uncheck all → Save
 
 ### 4. Add Bucket Policy (Allow Public Read)
 ```json
@@ -65,18 +64,19 @@ aws s3 sync . s3://rushikesh-portfolio --exclude ".git/*" --exclude "README.md"
 ```
 
 ### 6. Test S3 Endpoint
-- S3 website URL format:  
-  `http://rushikesh-portfolio.s3-website-us-east-1.amazonaws.com`
+```
+http://rushikesh-portfolio.s3-website-us-east-1.amazonaws.com
+```
 
 ### 7. Create CloudFront Distribution
 - Origin: S3 bucket website endpoint
-- Viewer Protocol Policy: **Redirect HTTP to HTTPS**
-- Minimum TLS Version: **TLSv1.2_2021**
+- Viewer Protocol Policy: Redirect HTTP to HTTPS
+- Minimum TLS Version: TLSv1.2_2021
 - Default Root Object: `index.html`
-- Wait ~10–15 min for deployment
+- Wait ~10-15 min for deployment
 
 ### 8. Verify HTTPS
-- Visit the CloudFront domain: `https://xxxxxxxx.cloudfront.net`
+- Visit: `https://xxxxxxxx.cloudfront.net`
 - Confirm padlock (HTTPS) in browser
 
 ### 9. (Optional) Custom Domain via Route 53
@@ -85,7 +85,7 @@ aws s3 sync . s3://rushikesh-portfolio --exclude ".git/*" --exclude "README.md"
 ---
 
 ## Skills Gained
-- S3 static website hosting & bucket policies
+- S3 static website hosting and bucket policies
 - IAM public access configuration
 - CloudFront CDN setup with HTTPS
 - AWS CLI for file sync
